@@ -73,31 +73,101 @@
   </div>
 
   <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
 
-    noBtn.addEventListener("mouseover", () => {
-      const maxX = window.innerWidth - noBtn.offsetWidth;
-      const maxY = window.innerHeight - noBtn.offsetHeight;
+  noBtn.addEventListener("mouseover", () => {
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
 
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
-      noBtn.style.left = `${randomX}px`;
-      noBtn.style.top = `${randomY}px`;
-    });
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
+  });
 
-    yesBtn.addEventListener("click", () => {
-      document.body.innerHTML = `
-        <div style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;background:linear-gradient(135deg,#ff9a9e,#fad0c4);">
-          <div class="success">
-            Yaaay 💖<br>
-            Date bestätigt 😍
-          </div>
+  yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+      <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        flex-direction:column;
+        background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+        color:white;
+        font-family:Arial,sans-serif;
+        text-align:center;
+        padding:20px;
+      ">
+        
+        <h1>Yaaay 💖</h1>
+        <h2>Wann passt dir unser Date? 😊</h2>
+
+        <input 
+          type="datetime-local" 
+          id="dateInput"
+          style="
+            padding:15px;
+            border:none;
+            border-radius:12px;
+            font-size:1.1rem;
+            margin-top:20px;
+          "
+        >
+
+        <button 
+          onclick="confirmDate()"
+          style="
+            margin-top:25px;
+            padding:15px 30px;
+            border:none;
+            border-radius:12px;
+            font-size:1.1rem;
+            background:white;
+            color:#ff5e8a;
+            cursor:pointer;
+          "
+        >
+          Termin bestätigen 💌
+        </button>
+      </div>
+    `;
+  });
+
+  function confirmDate() {
+    const selectedDate = document.getElementById("dateInput").value;
+
+    if (!selectedDate) {
+      alert("Bitte wähle erst ein Datum aus 😊");
+      return;
+    }
+
+    const formattedDate = new Date(selectedDate).toLocaleString("de-DE");
+
+    document.body.innerHTML = `
+      <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        flex-direction:column;
+        background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+        color:white;
+        font-family:Arial,sans-serif;
+        text-align:center;
+        padding:20px;
+      ">
+        <div class="success">
+          Perfekt 😍<br><br>
+          Unser Date ist geplant für:<br><br>
+          <strong>${formattedDate}</strong> 💖
         </div>
-      `;
-    });
-  </script>
+      </div>
+    `;
+  }
+</script>
 
 </body>
 </html>
